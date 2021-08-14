@@ -26,7 +26,7 @@ void File::getFiles(string path, vector<string>& files, vector<string>& ownName)
 		{
 			// 如果是目录，迭代之
 			// 如果不是，加入列表
-			if (fileinfo.attrib & _A_SUBDIR) {
+			if (fileinfo.attrib && _A_SUBDIR) {
 				if (strcmp(fileinfo.name, ".") != 0 && strcmp(fileinfo.name, "..") != 0) {
 					getFiles(p.assign(path).append("\\").append(fileinfo.name), files, ownName);
 				}
