@@ -10,23 +10,23 @@ File::~File() {
 }
 
 /// <summary>
-/// »ñÈ¡Ä³Â·¾¶ÏÂµÄËùÓĞÎÄ¼ş
+/// è·å–æŸè·¯å¾„ä¸‹çš„æ‰€æœ‰æ–‡ä»¶
 /// </summary>
-/// <param name="path">Òª²éÑ¯µÄÂ·¾¶</param>
-/// <param name="files">´æ´¢ÎÄ¼şµÄÂ·¾¶ºÍÃû³Æ</param>
-/// <param name="ownName">´æ´¢ÎÄ¼şµÄÃû³Æ</param>
+/// <param name="path">è¦æŸ¥è¯¢çš„è·¯å¾„</param>
+/// <param name="files">å­˜å‚¨æ–‡ä»¶çš„è·¯å¾„å’Œåç§°</param>
+/// <param name="ownName">å­˜å‚¨æ–‡ä»¶çš„åç§°</param>
 void File::getFiles(string path, vector<string>& files, vector<string>& ownName) {
-	// ÎÄ¼ş¾ä±ú
+	// æ–‡ä»¶å¥æŸ„
 	long hFile = 0;
-	// ÎÄ¼şĞÅÏ¢
+	// æ–‡ä»¶ä¿¡æ¯
 	struct _finddata_t fileinfo;
 	string p;
 	if ((hFile = _findfirst(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1) {
 		do
 		{
-			// Èç¹ûÊÇÄ¿Â¼£¬µü´úÖ®
-			// Èç¹û²»ÊÇ£¬¼ÓÈëÁĞ±í
-			if (fileinfo.attrib && _A_SUBDIR) {
+			// å¦‚æœæ˜¯ç›®å½•ï¼Œè¿­ä»£ä¹‹
+			// å¦‚æœä¸æ˜¯ï¼ŒåŠ å…¥åˆ—è¡¨
+			if (fileinfo.attrib & _A_SUBDIR) {
 				if (strcmp(fileinfo.name, ".") != 0 && strcmp(fileinfo.name, "..") != 0) {
 					getFiles(p.assign(path).append("\\").append(fileinfo.name), files, ownName);
 				}
